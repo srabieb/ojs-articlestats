@@ -1,0 +1,81 @@
+# Article Stats — view and download counters for OJS
+
+Shows how many times an article was viewed and its files downloaded — on the
+article landing page and in article lists (issue table of contents, search
+results, categories).
+
+```
+Views: 1 122 / PDF downloads: 274
+```
+
+- **Author:** Beibarys Sultan
+- **License:** [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.html)
+- **Compatible with:** OJS **3.3.x** and **3.4.x** from a single codebase
+  (tested on 3.3.0-9 / PHP 7.4 and 3.4.0-8 / PHP 8.2)
+
+## Why
+
+OJS collects usage statistics but shows readers very little of it: the default
+theme only draws a monthly downloads chart, and article landing page views are
+not surfaced at all. This plugin puts both numbers where readers look.
+
+## Where the numbers come from
+
+The plugin reads the statistics OJS has already processed — the same data that
+feeds the built-in reports:
+
+| OJS branch | Table |
+|---|---|
+| 3.4.x | `metrics_submission` |
+| 3.3.x | `metrics` |
+
+Counted rows are `assoc_type = 1048585` (article landing page views) and
+`assoc_type = 515` (galley file downloads). Values match the built-in
+`publicationStats` service exactly.
+
+Statistics are updated **once a day**, when the `UsageStatsLoader` scheduled
+task processes the previous day's usage log. Numbers therefore lag by about a
+day — this is how OJS works, not a plugin limitation. Figures cover the entire
+period of collected statistics.
+
+## Installation
+
+1. Copy the plugin into `plugins/generic/articlestats` of your OJS instance.
+2. Make the files readable by the web server user:
+   `chown -R www-data:www-data plugins/generic/articlestats`
+3. Enable it: **Settings → Website → Plugins → Article Stats**.
+
+No database changes are made. Disabling the plugin removes the counters and
+leaves no traces behind.
+
+## How it hooks in
+
+| Where | Mechanism |
+|---|---|
+| Article landing page | core hook `Templates::Article::Main` |
+| Article lists | core hook `Templates::Issue::Issue::Article` |
+| Position under the keywords | small script shipped with the plugin's template |
+
+Journal templates are **not** modified, so an OJS point release will not wipe
+the plugin out. The only non-standard part is the script that moves the block
+under the keywords: OJS has no extension point between the keywords and the
+abstract, and patching the journal template would be lost on upgrade.
+
+## Performance
+
+For an issue table of contents the statistics of every listed article are loaded
+with a single grouped query — not one query per row — and cached for the
+duration of the request.
+
+## Compatibility layer
+
+`ArticleStatsCompat.php` resolves everything that differs between branches:
+namespaced versus global classes, `Hook::add()` versus `HookRegistry::register()`,
+the statistics table name, and database access (OJS 3.4 provides a working
+Illuminate DB facade, 3.3 does not — there queries go through the DAO layer).
+
+## Translations
+
+Bundled locales: `en`, `ru`, `kk` — in both the short form used by OJS 3.4 and
+the `xx_XX` form used by 3.3. To add a language, copy `locale/en/locale.po` and
+translate the four strings.

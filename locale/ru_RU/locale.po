@@ -1,0 +1,18 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru_RU\n"
+
+msgid "plugins.generic.articlestats.displayName"
+msgstr "Счётчики просмотров и скачиваний"
+
+msgid "plugins.generic.articlestats.description"
+msgstr "Показывает число просмотров и скачиваний у статьи и в списке статей. Данные берутся из встроенной статистики OJS."
+
+msgid "plugins.generic.articlestats.views"
+msgstr "Просмотры"
+
+msgid "plugins.generic.articlestats.downloads"
+msgstr "Загрузок PDF"
