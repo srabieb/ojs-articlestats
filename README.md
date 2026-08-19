@@ -58,7 +58,17 @@ period of collected statistics.
 
 ## Installation
 
-1. Copy the plugin into `plugins/generic/articlestats` of your OJS instance.
+1. Put the plugin into `plugins/generic/articlestats` of your OJS instance:
+
+   ```bash
+   cd plugins/generic
+   git clone https://github.com/srabieb/ojs-articlestats.git articlestats
+   ```
+
+   The target directory **must** be named `articlestats` — OJS derives the
+   plugin class name from it. Alternatively download a release archive from the
+   [Releases page](https://github.com/srabieb/ojs-articlestats/releases) and
+   unpack it there.
 2. Make the files readable by the web server user:
    `chown -R www-data:www-data plugins/generic/articlestats`
 3. Enable it: **Settings → Website → Plugins → Article Stats**.
