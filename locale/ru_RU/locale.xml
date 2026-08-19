@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+<!--
+  * locale/ru_RU/locale.xml
+  *
+  * Copyright (c) 2026 Beibarys Sultan
+  * Distributed under the GNU GPL v3.
+  *
+  * Localisation strings for OJS 3.1.x, which reads locale.xml instead of locale.po.
+  -->
+<locale name="ru_RU" full_name="ru_RU">
+	<message key="plugins.generic.articlestats.displayName">Счётчики просмотров и скачиваний</message>
+	<message key="plugins.generic.articlestats.description">Показывает число просмотров и скачиваний у статьи и в списке статей. Данные берутся из встроенной статистики OJS.</message>
+	<message key="plugins.generic.articlestats.views">Просмотры</message>
+	<message key="plugins.generic.articlestats.downloads">Загрузок PDF</message>
+</locale>

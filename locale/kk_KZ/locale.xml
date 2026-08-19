@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+<!--
+  * locale/kk_KZ/locale.xml
+  *
+  * Copyright (c) 2026 Beibarys Sultan
+  * Distributed under the GNU GPL v3.
+  *
+  * Localisation strings for OJS 3.1.x, which reads locale.xml instead of locale.po.
+  -->
+<locale name="kk_KZ" full_name="kk_KZ">
+	<message key="plugins.generic.articlestats.displayName">Қаралым және жүктеу санауыштары</message>
+	<message key="plugins.generic.articlestats.description">Мақала бетінде және мақалалар тізімінде қаралым мен жүктеу санын көрсетеді.</message>
+	<message key="plugins.generic.articlestats.views">Қаралымдар</message>
+	<message key="plugins.generic.articlestats.downloads">PDF жүктеулері</message>
+</locale>

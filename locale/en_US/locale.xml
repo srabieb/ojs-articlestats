@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+<!--
+  * locale/en_US/locale.xml
+  *
+  * Copyright (c) 2026 Beibarys Sultan
+  * Distributed under the GNU GPL v3.
+  *
+  * Localisation strings for OJS 3.1.x, which reads locale.xml instead of locale.po.
+  -->
+<locale name="en_US" full_name="en_US">
+	<message key="plugins.generic.articlestats.displayName">Article view and download counters</message>
+	<message key="plugins.generic.articlestats.description">Shows view and download counts on the article page and in article lists, using the built-in OJS statistics.</message>
+	<message key="plugins.generic.articlestats.views">Views</message>
+	<message key="plugins.generic.articlestats.downloads">PDF downloads</message>
+</locale>

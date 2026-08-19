@@ -18,7 +18,7 @@
 if (!function_exists('articleStatsClass')) {
 
     /** Resolves a class name: namespaced first (3.4), then the legacy global one (3.3). */
-    function articleStatsClass(string $namespaced, string $legacy, ?string $import = null): string
+    function articleStatsClass($namespaced, $legacy, $import = null)
     {
         if (class_exists($namespaced)) {
             return $namespaced;
@@ -30,7 +30,7 @@ if (!function_exists('articleStatsClass')) {
     }
 
     /** Registers a hook through whichever API this OJS provides. */
-    function articleStatsAddHook(string $hookName, callable $callback): void
+    function articleStatsAddHook($hookName, $callback)
     {
         if (class_exists('\PKP\plugins\Hook')) {
             \PKP\plugins\Hook::add($hookName, $callback);
@@ -51,7 +51,7 @@ if (!function_exists('articleStatsClass')) {
     }
 
     /** Association type of an article landing page view. */
-    function articleStatsViewAssocType(): int
+    function articleStatsViewAssocType()
     {
         if (defined('ASSOC_TYPE_SUBMISSION')) {
             return (int) constant('ASSOC_TYPE_SUBMISSION');
@@ -62,7 +62,7 @@ if (!function_exists('articleStatsClass')) {
     }
 
     /** Association type of a galley file download. */
-    function articleStatsDownloadAssocType(): int
+    function articleStatsDownloadAssocType()
     {
         if (defined('ASSOC_TYPE_SUBMISSION_FILE')) {
             return (int) constant('ASSOC_TYPE_SUBMISSION_FILE');
@@ -78,7 +78,7 @@ if (!function_exists('articleStatsClass')) {
      * OJS 3.4 exposes a working Illuminate DB facade; in 3.3 the facade root is
      * not set, so queries have to go through the DAO layer.
      */
-    function articleStatsSelect(string $sql, array $params = []): array
+    function articleStatsSelect($sql, $params = array())
     {
         if (class_exists('\Illuminate\Support\Facades\DB')) {
             try {
@@ -103,7 +103,7 @@ if (!function_exists('articleStatsClass')) {
      * Name of the table holding processed usage statistics.
      * OJS 3.4 splits metrics per object type; 3.3 keeps a single `metrics` table.
      */
-    function articleStatsMetricsTable(): string
+    function articleStatsMetricsTable()
     {
         static $table = null;
         if ($table !== null) {

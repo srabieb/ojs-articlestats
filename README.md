@@ -10,8 +10,20 @@ Views: 1 122 / PDF downloads: 274
 
 - **Author:** Beibarys Sultan
 - **License:** [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.html)
-- **Compatible with:** OJS **3.3.x** and **3.4.x** from a single codebase
-  (tested on 3.3.0-9 / PHP 7.4 and 3.4.0-8 / PHP 8.2)
+- **Compatible with:** OJS 3.x from a single codebase
+
+| OJS | Status | Notes |
+|---|---|---|
+| 3.4.x | **tested** — 3.4.0-8, PHP 8.2 | statistics in `metrics_submission`, `.po` locales (`en`) |
+| 3.3.x | **tested** — 3.3.0-9, PHP 7.4 | statistics in `metrics`, `.po` locales (`en_US`) |
+| 3.2.x | expected to work, untested | same plugin API and `.po` locales as 3.3 |
+| 3.1.2+ | expected to work, untested | `.xml` locales are bundled for this branch |
+| 3.0.x–3.1.1 | not supported | the required template hooks are missing |
+
+Both required hooks — `Templates::Article::Main` and
+`Templates::Issue::Issue::Article` — were verified to exist in the 3.1.2, 3.2.1,
+3.3.0 and 3.4.0 sources. Code is written against PHP 7.0 syntax so it also runs
+on the oldest supported branch.
 
 ## Why
 
