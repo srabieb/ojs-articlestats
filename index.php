@@ -6,12 +6,10 @@
  * @copyright (c) 2026 Beibarys Sultan
  * @license http://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3
  *
- * @brief Wrapper that loads the plugin. Required by OJS 3.3 and used by 3.4 as
- *        the fallback loader for plugins whose classes are not PSR-4 namespaced.
+ * @brief Legacy loader for OJS 3.1-3.3, which do not autoload plugin classes.
+ *        OJS 3.4 and 3.5 pick the class up through PSR-4 and never read this file.
  */
 
-require_once(dirname(__FILE__) . '/ArticleStatsCompat.php');
-require_once(dirname(__FILE__) . '/ArticleStatsData.php');
-require_once(dirname(__FILE__) . '/ArticleStatsPlugin.php');
+require_once(dirname(__FILE__) . '/ArticlestatsPlugin.php');
 
-return new ArticleStatsPlugin();
+return new APP\plugins\generic\articlestats\ArticlestatsPlugin();

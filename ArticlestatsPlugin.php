@@ -6,7 +6,7 @@
  * @copyright (c) 2026 Beibarys Sultan
  * @license http://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3
  *
- * @class ArticleStatsPlugin
+ * @class ArticlestatsPlugin
  * @ingroup plugins_generic_articlestats
  *
  * @brief Shows view and download counts to readers.
@@ -20,7 +20,14 @@
  * are not modified, so an OJS upgrade will not wipe it out.
  */
 
-class ArticleStatsPlugin extends ArticleStatsBasePlugin
+namespace APP\plugins\generic\articlestats;
+
+// Loaded either by the PSR-4 autoloader (OJS 3.4+) or by index.php (OJS 3.1-3.3);
+// in both cases the shared helpers have to be available.
+require_once(dirname(__FILE__) . '/ArticleStatsCompat.php');
+require_once(dirname(__FILE__) . '/ArticleStatsData.php');
+
+class ArticlestatsPlugin extends \ArticleStatsBasePlugin
 {
     public function register($category, $path, $mainContextId = null)
     {
@@ -31,8 +38,8 @@ class ArticleStatsPlugin extends ArticleStatsBasePlugin
         }
 
         if ($success && $this->getEnabled()) {
-            articleStatsAddHook('Templates::Article::Main', [$this, 'showOnArticlePage']);
-            articleStatsAddHook('Templates::Issue::Issue::Article', [$this, 'showInList']);
+            \articleStatsAddHook('Templates::Article::Main', [$this, 'showOnArticlePage']);
+            \articleStatsAddHook('Templates::Issue::Issue::Article', [$this, 'showInList']);
             $this->addLocaleData();
         }
 
@@ -41,7 +48,7 @@ class ArticleStatsPlugin extends ArticleStatsBasePlugin
 
     public function getName()
     {
-        return 'ArticleStatsPlugin';
+        return 'ArticlestatsPlugin';
     }
 
     public function getDisplayName()
@@ -89,7 +96,7 @@ class ArticleStatsPlugin extends ArticleStatsBasePlugin
         // In an issue table of contents every article is known upfront,
         // so their statistics are fetched with a single query.
         $issueArticles = $smarty->getTemplateVars('articles');
-        if (is_array($issueArticles) || $issueArticles instanceof Traversable) {
+        if (is_array($issueArticles) || $issueArticles instanceof \Traversable) {
             $ids = [];
             foreach ($issueArticles as $item) {
                 if (is_object($item) && method_exists($item, 'getId')) {
@@ -97,7 +104,7 @@ class ArticleStatsPlugin extends ArticleStatsBasePlugin
                 }
             }
             if ($ids) {
-                ArticleStatsData::preload($ids);
+                \ArticleStatsData::preload($ids);
             }
         }
 
@@ -107,12 +114,12 @@ class ArticleStatsPlugin extends ArticleStatsBasePlugin
 
     private function render($submissionId, $template)
     {
-        $stats = ArticleStatsData::forSubmission($submissionId);
-        $templateManager = articleStatsTemplateManager();
+        $stats = \ArticleStatsData::forSubmission($submissionId);
+        $templateManager = \articleStatsTemplateManager();
 
         $templateManager->assign([
-            'articlestatsViews' => ArticleStatsData::format($stats['views']),
-            'articlestatsDownloads' => ArticleStatsData::format($stats['downloads']),
+            'articlestatsViews' => \ArticleStatsData::format($stats['views']),
+            'articlestatsDownloads' => \ArticleStatsData::format($stats['downloads']),
             'articlestatsHasData' => ($stats['views'] + $stats['downloads']) > 0,
         ]);
 
