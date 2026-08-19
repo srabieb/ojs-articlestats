@@ -10,10 +10,11 @@ Views: 1 122 / PDF downloads: 274
 
 - **Author:** Beibarys Sultan
 - **License:** [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.html)
-- **Compatible with:** OJS 3.x from a single codebase
+- **Compatible with:** OJS 3.1.2 – 3.5 from a single codebase
 
 | OJS | Status | Notes |
 |---|---|---|
+| 3.5.x | verified against sources, untested live | same hooks, namespaces and `metrics_submission` table as 3.4 |
 | 3.4.x | **tested** — 3.4.0-8, PHP 8.2 | statistics in `metrics_submission`, `.po` locales (`en`) |
 | 3.3.x | **tested** — 3.3.0-9, PHP 7.4 | statistics in `metrics`, `.po` locales (`en_US`) |
 | 3.2.x | expected to work, untested | same plugin API and `.po` locales as 3.3 |
@@ -22,8 +23,13 @@ Views: 1 122 / PDF downloads: 274
 
 Both required hooks — `Templates::Article::Main` and
 `Templates::Issue::Issue::Article` — were verified to exist in the 3.1.2, 3.2.1,
-3.3.0 and 3.4.0 sources. Code is written against PHP 7.0 syntax so it also runs
-on the oldest supported branch.
+3.3.0, 3.4.0 and 3.5.0 sources.
+
+The plugin class lives in `APP\plugins\generic\articlestats`, so OJS 3.4 and
+3.5 load it through the autoloader. `index.php` is only a fallback for 3.1–3.3,
+which have no plugin autoloading; OJS deprecated that loader in 3.4 and the
+plugin no longer relies on it. Code is written against PHP 7.0 syntax so it also
+runs on the oldest supported branch.
 
 ## Why
 
@@ -38,8 +44,8 @@ feeds the built-in reports:
 
 | OJS branch | Table |
 |---|---|
-| 3.4.x | `metrics_submission` |
-| 3.3.x | `metrics` |
+| 3.4.x, 3.5.x | `metrics_submission` |
+| 3.1.x – 3.3.x | `metrics` |
 
 Counted rows are `assoc_type = 1048585` (article landing page views) and
 `assoc_type = 515` (galley file downloads). Values match the built-in

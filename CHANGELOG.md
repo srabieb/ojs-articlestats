@@ -11,7 +11,9 @@ First release.
 - View and download counters on the article landing page.
 - Compact counters in article lists: issue table of contents, search results,
   categories.
-- Support for OJS 3.3.x and 3.4.x from a single codebase.
+- Support for OJS 3.1.2 through 3.5 from a single codebase: PSR-4 class for
+  3.4/3.5, index.php loader for 3.1-3.3, and a compatibility layer for hooks,
+  database access and the statistics table name.
 - Locales: English, Russian, Kazakh (both `xx` and `xx_XX` directory forms).
 - Batch loading of statistics for article lists — one query per page instead of
   one per article.
