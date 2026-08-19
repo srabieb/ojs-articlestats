@@ -58,23 +58,33 @@ period of collected statistics.
 
 ## Installation
 
-1. Put the plugin into `plugins/generic/articlestats` of your OJS instance:
+### From the OJS interface (recommended)
 
-   ```bash
-   cd plugins/generic
-   git clone https://github.com/srabieb/ojs-articlestats.git articlestats
-   ```
+1. Download `articlestats-<version>.tar.gz` from the
+   [Releases page](https://github.com/srabieb/ojs-articlestats/releases).
+2. Go to **Settings → Website → Plugins → Upload a New Plugin** and upload the
+   archive. OJS unpacks it into `plugins/generic/articlestats` on its own — the
+   destination is taken from `version.xml`, and file ownership is handled for
+   you.
+3. Enable **Article Stats** in the plugin list.
 
-   The target directory **must** be named `articlestats` — OJS derives the
-   plugin class name from it. Alternatively download a release archive from the
-   [Releases page](https://github.com/srabieb/ojs-articlestats/releases) and
-   unpack it there.
-2. Make the files readable by the web server user:
-   `chown -R www-data:www-data plugins/generic/articlestats`
-3. Enable it: **Settings → Website → Plugins → Article Stats**.
+Later releases are installed the same way: OJS compares the version in the
+archive with the installed one and offers an upgrade.
 
-No database changes are made. Disabling the plugin removes the counters and
-leaves no traces behind.
+### From the command line
+
+```bash
+cd plugins/generic
+git clone https://github.com/srabieb/ojs-articlestats.git articlestats
+chown -R www-data:www-data articlestats
+```
+
+The target directory **must** be named `articlestats` — OJS derives the plugin
+class name from it. Then enable the plugin in
+**Settings → Website → Plugins**.
+
+No database changes are made beyond the usual plugin version record. Disabling
+the plugin removes the counters and leaves no traces behind.
 
 ## How it hooks in
 
